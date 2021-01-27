@@ -1,0 +1,32 @@
+protocol {{ module_info.name }}ScreenOutput: AnyObject {}
+
+protocol {{ module_info.name }}ScreenInput: AnyObject {}
+
+class {{ module_info.name }}Presenter {
+
+    // MARK: - Properties
+
+    weak var view: {{ module_info.name }}ViewInput?
+	let router: {{ module_info.name }}RouterInput
+    private let interactor: {{ module_info.name }}InteractorInput
+    weak var output: {{ module_info.name }}ScreenOutput?
+
+    // MARK: - Lifecycle
+
+    init(router: {{ module_info.name }}RouterInput, interactor: {{ module_info.name }}InteractorInput) {
+    	self.router = router
+        self.interactor = interactor
+    }
+}
+
+// MARK: - {{ module_info.name }}ViewOutput
+
+extension {{ module_info.name }}Presenter: {{ module_info.name }}ViewOutput { }
+
+// MARK: - {{ module_info.name }}ScreenInput
+
+extension {{ module_info.name }}Presenter: {{ module_info.name }}ScreenInput { }
+
+// MARK: - {{ module_info.name }}InteractorOutput
+
+extension {{ module_info.name }}Presenter: {{ module_info.name }}InteractorOutput { }
