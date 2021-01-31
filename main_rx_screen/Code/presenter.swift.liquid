@@ -1,0 +1,34 @@
+//___FILEHEADER___
+
+import RxSwift
+import RxCocoa
+
+final class {{ module_info.name }}Presenter {
+
+    // MARK: - Properties
+
+    private let service: {{ module_info.name }}ServiceProvider
+    private let router: {{ module_info.name }}InternalRouter
+
+    private let propsRelay = BehaviorRelay<{{ module_info.name }}ViewController.Props> (value: .default)
+    var rx_props: Observable<{{ module_info.name }}ViewController.Props> {
+        propsRelay.asObservable()
+    }
+
+    // MARK: - Lifecycle
+
+    init(service: {{ module_info.name }}ServiceProvider, router: {{ module_info.name }}InternalRouter) {
+        self.service = service
+        self.router = router
+
+        setup()
+    }
+
+    // MARK: - Private Methods
+
+    private func setup() {
+        // propsRelay.mutate {
+        //     $0.<#parameter#> = <#value#>
+        // }
+    }
+}

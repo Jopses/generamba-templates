@@ -1,0 +1,25 @@
+# Template information section
+name: "main_rx_screen"
+summary: "Template for creating MVP screens."
+author: "Pavel Zorin"
+version: "1.1"
+license: "MIT"
+
+# The declarations for code files
+
+code_files:
+
+# View layer
+- {name: ViewController.swift, path: Code/view_controller.swift.liquid}
+
+# Presenter layer
+- {name: Presenter.swift, path: Code/presenter.swift.liquid}
+
+# Service Provider layer
+- {name: ServiceProvider.swift, path: Code/service_rovider.swift.liquid}
+
+# Router layer
+- {name: Router.swift, path: Code/router.swift.liquid}
+
+# Module
+- {name: Module.swift, path: Code/module.swift.liquid}

@@ -1,0 +1,50 @@
+//___FILEHEADER___
+
+import Swinject
+import SwinjectAutoregistration
+
+protocol {{ module_info.name }}ViewFactory {
+    func createViewController() -> {{ module_info.name }}ViewController
+}
+
+final class {{ module_info.name }}Module: AppModule, Assembly {
+    // MARK: - Properties
+
+    private var resolver: Resolver!
+
+    func createAssembly() -> Assembly? {
+        return self
+    }
+
+    func loaded(resolver: Resolver) {
+        self.resolver = resolver
+    }
+
+    func assemble(container: Container) {
+        container.autoregister({{ module_info.name }}ServiceProviderImpl.self, initializer: {{ module_info.name }}ServiceProviderImpl.init)
+            .implements({{ module_info.name }}ServiceProvider.self)
+
+        container.autoregister({{ module_info.name }}Router.self, initializer: {{ module_info.name }}Router.init)
+            .implements({{ module_info.name }}PublicRouter.self, {{ module_info.name }}InternalRouter.self)
+            .inObjectScope(.container)
+
+        container.register({{ module_info.name }}ViewController.self) { (resolver) in
+            let presenter = {{ module_info.name }}Presenter(service: resolver.resolve(), router: resolver.resolve())
+            let viewController = {{ module_info.name }}ViewController()
+            viewController.bind(to: presenter)
+            return viewController
+        }
+
+        container.register({{ module_info.name }}ViewFactory.self) { _ in
+            return self
+        }
+    }
+}
+
+// MARK: - {{ module_info.name }}ViewFactory
+
+extension {{ module_info.name }}Module: {{ module_info.name }}ViewFactory {
+    func createViewController() -> {{ module_info.name }}ViewController {
+        return resolver.resolve({{ module_info.name }}ViewController.self)!
+    }
+}

@@ -1,0 +1,28 @@
+//___FILEHEADER___
+
+protocol {{ module_info.name }}PublicRouter {}
+
+protocol {{ module_info.name }}InternalRouter {}
+
+final class {{ module_info.name }}Router {
+
+    // MARK: - Properties
+
+    private let factory: {{ module_info.name }}ViewFactory
+    private let appRouter: AppRouter
+
+    // MARK: - Lifecycle
+
+    init(factory: {{ module_info.name }}ViewFactory, appRouter: AppRouter) {
+        self.factory = factory
+        self.appRouter = appRouter
+    }
+}
+
+// MARK: - {{ module_info.name }}PublicRouter
+
+extension {{ module_info.name }}Router: {{ module_info.name }}PublicRouter {}
+
+// MARK: - {{ module_info.name }}InternalRouter
+
+extension {{ module_info.name }}Router: {{ module_info.name }}InternalRouter {}
