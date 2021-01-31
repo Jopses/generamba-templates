@@ -16,7 +16,7 @@ code_files:
 - {name: Presenter.swift, path: Code/presenter.swift.liquid}
 
 # Service Provider layer
-- {name: ServiceProvider.swift, path: Code/service_rovider.swift.liquid}
+- {name: ServiceProvider.swift, path: Code/service_provider.swift.liquid}
 
 # Router layer
 - {name: Router.swift, path: Code/router.swift.liquid}
