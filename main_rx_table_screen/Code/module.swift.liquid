@@ -37,8 +37,11 @@ final class {{ module_info.name }}Module: AppModule, Assembly {
         container.autoregister({{ module_info.name }}Presenter.self, initializer: {{ module_info.name }}Presenter.init)
         .implements({{ module_info.name }}PresenterOutput.self)
 
+        container.autoregister({{ module_info.name }}TableAdapter.self, initializer: {{ module_info.name }}TableAdapter.init)
+        .implements({{ module_info.name }}TableAdapterOutput.self)
+
         container.register({{ module_info.name }}ViewController.self) { resolver in
-            let viewController = {{ module_info.name }}ViewController()
+            let viewController = {{ module_info.name }}ViewController(tableAdapter: resolver.resolve())
             viewController.bind(to: resolver.resolve())
             return viewController
         }

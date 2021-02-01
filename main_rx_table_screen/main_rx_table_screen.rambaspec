@@ -1,7 +1,7 @@
 # Template information section
-name: "main_rx_screen"
-summary: "Template for creating Rx screens."
-author: "Dmitry Yakushin"
+name: "main_rx_table_screen"
+summary: "Template for creating Rx table screens."
+author: "Pavel Zorin"
 version: "1.1"
 license: "MIT"
 
@@ -14,6 +14,9 @@ code_files:
 
 # Presenter layer
 - {name: Presenter.swift, path: Code/presenter.swift.liquid}
+
+# Table Adapter layer
+- {name: TableAdapter.swift, path: Code/table_adapter.swift.liquid}
 
 # Service Provider layer
 - {name: ServiceProvider.swift, path: Code/service_provider.swift.liquid}
