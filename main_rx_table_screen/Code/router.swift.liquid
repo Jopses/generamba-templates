@@ -6,9 +6,9 @@
 //  Copyright © {{ year }} {{ developer.company }}. All rights reserved.
 //
 
-protocol {{ module_info.name }}PublicRouter {}
+protocol {{ module_info.name }}PublicRouter: AnyObject {}
 
-protocol {{ module_info.name }}InternalRouter {}
+protocol {{ module_info.name }}InternalRouter: AnyObject {}
 
 final class {{ module_info.name }}Router {
 
