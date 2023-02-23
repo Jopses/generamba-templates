@@ -41,7 +41,7 @@ final class {{ module_info.name }}Module: AppModule, Assembly {
 
         container.register({{ module_info.name }}ViewController.self) { resolver in
             let viewController = {{ module_info.name }}ViewController(dataSource: resolver.resolve())
-            viewController.bind(to: resolver.resolve({ module_info.name }}Presenter.self)!)
+            viewController.bind(to: resolver.resolve({{ module_info.name }}Presenter.self)!)
             return viewController
         }
 
