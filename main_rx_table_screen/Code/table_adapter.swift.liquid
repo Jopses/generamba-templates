@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol {{ module_info.name }}TableAdapterOutput: AnyObject {}
+protocol {{ module_info.name }}DataSourceOutput: AnyObject {}
 
-class {{ module_info.name }}TableAdapter: NSObject {
+class {{ module_info.name }}DataSource: NSObject {
     // MARK: - Properties
 
     var items: [PreparableViewModel] = []
-    weak var output: {{ module_info.name }}TableAdapterOutput?
+    weak var output: {{ module_info.name }}DataSourceOutput?
 
     // MARK: - Lifecycle
 
@@ -25,7 +25,7 @@ class {{ module_info.name }}TableAdapter: NSObject {
 
 // MARK: - UITableViewDataSource
 
-extension {{ module_info.name }}TableAdapter: UITableViewDataSource {
+extension {{ module_info.name }}DataSource: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         items.count
     }
@@ -42,4 +42,4 @@ extension {{ module_info.name }}TableAdapter: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 
-extension {{ module_info.name }}TableAdapter: UITableViewDelegate {}
+extension {{ module_info.name }}DataSource: UITableViewDelegate {}

@@ -9,19 +9,20 @@
 import RxSwift
 import RxCocoa
 
-protocol {{ module_info.name }}PresenterOutput: AnyObject {
-    var rx_props: Observable<{{ module_info.name }}ViewController.Props> { get }
-}
-
-final class {{ module_info.name }}Presenter {
+final class {{ module_info.name }}Presenter: PropsProducer {
 
     // MARK: - Properties
 
+    typealias Props = {{ module_info.name }}ViewController.Props
     private let disposeBag = DisposeBag()
     private let service: {{ module_info.name }}ServiceProvider
     private let router: {{ module_info.name }}InternalRouter
 
-    private let propsRelay = BehaviorRelay<{{ module_info.name }}ViewController.Props>(value: .default)
+    private let propsRelay = BehaviorRelay<Props>(value: .default)
+
+    var rx_props: Driver<Props> {
+        propsRelay.asDriver()
+    }
 
     // MARK: - Lifecycle
 
@@ -38,13 +39,5 @@ final class {{ module_info.name }}Presenter {
         // propsRelay.mutate {
         //     $0.<#parameter#> = <#value#>
         // }
-    }
-}
-
-// MARK: - {{ module_info.name }}PresenterOutput
-
-extension {{ module_info.name }}Presenter: {{ module_info.name }}PresenterOutput {
-    var rx_props: Observable<{{ module_info.name }}ViewController.Props> {
-        propsRelay.asObservable()
     }
 }

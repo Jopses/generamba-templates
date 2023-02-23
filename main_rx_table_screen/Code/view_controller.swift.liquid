@@ -10,25 +10,25 @@ import UIKit
 import SnapKit
 import RxSwift
 
-final class {{ module_info.name }}ViewController: UIViewController {
+final class {{ module_info.name }}ViewController: UIViewController, PropsConsumer {
 
     // MARK: - Properties
 
-    private let tableAdapter: {{ module_info.name }}TableAdapter
+    private let dataSource: {{ module_info.name }}DataSource
 
     private let disposeBag = DisposeBag()
-    private var props: Props = .default {
-        didSet { render() }
+    var props: Props = .default {
+        didSet { render(oldProps: oldValue, newProps: props) }
     }
     private lazy var tableView = with(UITableView()) {
-        $0.dataSource = tableAdapter
-        $0.delegate = tableAdapter
+        $0.dataSource = dataSource
+        $0.delegate = dataSource
     }
 
     // MARK: - Lifecycle
 
-    init(tableAdapter: {{ module_info.name }}TableAdapter) {
-        self.tableAdapter = tableAdapter
+    init(dataSource: {{ module_info.name }}DataSource) {
+        self.dataSource = dataSource
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -40,7 +40,7 @@ final class {{ module_info.name }}ViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    private func render() {}
+    private func render(oldProps: Props, newProps: Props) {}
 }
 
 // MARK: - Props
@@ -50,19 +50,5 @@ extension {{ module_info.name }}ViewController {
         // var <#name#>: <#type#>
 
         static var `default` = Props()
-    }
-}
-
-// MARK: - Bind
-
-extension {{ module_info.name }}ViewController {
-    public func bind(to presenter: {{ module_info.name }}Presenter) {
-        func holdRef(_: Any) {}
-
-        _ = presenter.rx_props.bind { [weak self] props in
-            holdRef(presenter)
-            self?.props = props
-        }
-        .disposed(by: disposeBag)
     }
 }

@@ -15,8 +15,8 @@ code_files:
 # Presenter layer
 - {name: Presenter.swift, path: Code/presenter.swift.liquid}
 
-# Table Adapter layer
-- {name: TableAdapter.swift, path: Code/table_adapter.swift.liquid}
+# Data Source layer
+- {name: DataSource.swift, path: Code/table_adapter.swift.liquid}
 
 # Service Provider layer
 - {name: ServiceProvider.swift, path: Code/service_provider.swift.liquid}

@@ -10,13 +10,13 @@ import UIKit
 import SnapKit
 import RxSwift
 
-final class {{ module_info.name }}ViewController: UIViewController {
+final class {{ module_info.name }}ViewController: UIViewController, PropsConsumer {
 
     // MARK: - Properties
 
     private let disposeBag = DisposeBag()
-    private var props: Props = .default {
-        didSet { render() }
+    var props: Props = .default {
+        didSet { render(oldProps: oldValue, newProps: props) }
     }
 
     // MARK: - Lifecycle
@@ -25,7 +25,7 @@ final class {{ module_info.name }}ViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    private func render() {}
+    private func render(oldProps: Props, newProps: Props) {}
 }
 
 // MARK: - Props
@@ -35,19 +35,5 @@ extension {{ module_info.name }}ViewController {
         // var <#name#>: <#type#>
 
         static var `default` = Props()
-    }
-}
-
-// MARK: - Bind
-
-extension {{ module_info.name }}ViewController {
-    public func bind(to presenter: {{ module_info.name }}Presenter) {
-        func holdRef(_: Any) {}
-
-        _ = presenter.rx_props.bind { [weak self] props in
-            holdRef(presenter)
-            self?.props = props
-        }
-        .disposed(by: disposeBag)
     }
 }

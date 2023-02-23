@@ -35,11 +35,10 @@ final class {{ module_info.name }}Module: AppModule, Assembly {
             .inObjectScope(.container)
 
         container.autoregister({{ module_info.name }}Presenter.self, initializer: {{ module_info.name }}Presenter.init)
-        .implements({{ module_info.name }}PresenterOutput.self)
 
         container.register({{ module_info.name }}ViewController.self) { resolver in
             let viewController = {{ module_info.name }}ViewController()
-            viewController.bind(to: resolver.resolve())
+            viewController.bind(to: resolver.resolve({{ module_info.name }}Presenter.self)!)
             return viewController
         }
 
